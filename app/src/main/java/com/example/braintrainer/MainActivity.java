@@ -12,6 +12,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+    //TODO add a countdown timer for the game
+    // think of a way to randomize the correct answer choice
+    // add a done text and play again button after countdown ends
+
+
+
     Random random = new Random();
     int number1;
     int number2;
