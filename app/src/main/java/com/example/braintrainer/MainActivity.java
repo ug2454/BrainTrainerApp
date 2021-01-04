@@ -22,15 +22,15 @@ public class MainActivity extends AppCompatActivity {
     TextView score;
     int correctAnswerCounter = 0;
     int totalAnswerCounter = 0;
-    Button button;
     Button optionButton;
+    Button button;
+    Button optionButton1;
+    Button optionButton2;
+    Button optionButton3;
+    Button optionButton4;
     ConstraintLayout constraintLayout;
 
-    public void startGame(View view) {
-        button = findViewById(R.id.button);
-        button.setVisibility(View.INVISIBLE);
-        constraintLayout = findViewById(R.id.gridConstraintLayout);
-        constraintLayout.setVisibility(View.VISIBLE);
+    public void updateUI(){
         number1 = random.nextInt(10) + 1;
         number2 = random.nextInt(10) + 1;
         number3 = random.nextInt(20) + 10;
@@ -42,18 +42,36 @@ public class MainActivity extends AppCompatActivity {
         score = findViewById(R.id.textView3);
         score.setText(correctAnswerCounter + " / " + totalAnswerCounter);
         correctSum = number1 + number2;
-        optionButton = (Button) view;
+        optionButton1=findViewById(R.id.optionButton1);
+        optionButton2=findViewById(R.id.optionButton2);
+        optionButton3=findViewById(R.id.optionButton3);
+        optionButton4=findViewById(R.id.optionButton4);
+        optionButton4.setText(Integer.toString(number3));
+        optionButton3.setText(Integer.toString(number4));
+        optionButton2.setText(Integer.toString(correctSum));
+        optionButton1.setText(Integer.toString(number1));
+    }
 
-        for(int i=0;i<3;i++){
-            optionButton.getTag(i)
-        }
-        optionButton.setText(Integer.toString(number3));
+    public void startGame(View view) {
+        button = findViewById(R.id.button);
+        button.setVisibility(View.INVISIBLE);
+        constraintLayout = findViewById(R.id.gridConstraintLayout);
+        constraintLayout.setVisibility(View.VISIBLE);
+       updateUI();
 
-        optionButton.setText(Integer.toString(number4));
 
-        optionButton.setText(Integer.toString(correctSum));
+//        for(int i=0;i<3;i++){
+//            optionButton.setText(Integer.toString(random.nextInt()));
+//        }
 
-        optionButton.setText(Integer.toString(number1));
+
+
+
+
+//
+//        optionButton.setText(Integer.toString(correctSum));
+//
+//        optionButton.setText(Integer.toString(number1));
 
 
     }
@@ -81,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         totalAnswerCounter++;
+        updateUI();
 
         Log.i("option", optionButton.getTag().toString());
 
