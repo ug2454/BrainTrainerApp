@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     TextView sum;
     TextView timer;
     int correctSum = 0;
+
     TextView score;
     int correctAnswerCounter = 0;
     int totalAnswerCounter = 0;
@@ -41,17 +43,43 @@ public class MainActivity extends AppCompatActivity {
     CountDownTimer countDownTimer = null;
     TextView textView5;
     Button button2;
-    ArrayList<Integer> integers = new ArrayList<Integer>();
+
+    ArrayList<Integer> integers = new ArrayList<>();
+    ArrayList<String> operators = new ArrayList<>(Arrays.asList("+","-","*"));
+    int locationOfCorrectAnswer=0;
+
+
 
     public void updateUI() {
+        locationOfCorrectAnswer = random.nextInt(4);
+        System.out.println(locationOfCorrectAnswer);
 
-
+        int randomOperator=random.nextInt(3);
         number1 = random.nextInt(30) + 1;
         number2 = random.nextInt(30) + 1;
 
+
+
         System.out.println(number1 + "" + number2);
         sum = findViewById(R.id.textView2);
-        sum.setText(number1 + " + " + number2);
+        if(randomOperator==0){
+            sum.setText(number1 + " + " + number2);
+        }
+        else if(randomOperator==1){
+            if(number1>number2){
+                sum.setText(number1 + " - " + number2);
+            }
+            else{
+                sum.setText(number2+ " - " + number1);
+            }
+
+
+
+        }
+        else if(randomOperator==2){
+            sum.setText(number1 + " * " + number2);
+        }
+
 
         score = findViewById(R.id.textView3);
         score.setText(correctAnswerCounter + " / " + totalAnswerCounter);
@@ -65,11 +93,33 @@ public class MainActivity extends AppCompatActivity {
         optionButton3.setClickable(true);
         optionButton4.setClickable(true);
 
-        int locationOfCorrectAnswer = random.nextInt(4);
+
+
+
+
 
         for (int i = 0; i < 4; i++) {
             if (i == locationOfCorrectAnswer) {
-                integers.add(number1 + number2);
+                if(randomOperator==0){
+                    integers.add(number1 + number2);
+                    correctSum=number1+number2;
+                }
+                else if(randomOperator==1){
+                    if(number1>number2){
+                        integers.add(number1-number2);
+                        correctSum=number1-number2;
+                    }
+                    else{
+                        integers.add(number2-number1);
+                        correctSum=number2-number1;
+                    }
+
+                }
+                else if(randomOperator==2){
+                    integers.add(number1*number2);
+                    correctSum=number1*number2;
+                }
+
             } else {
                 int wrongAnswer = random.nextInt(40);
                 if (wrongAnswer == number1 + number2) {  //is wrong answer same as correct answer? assign a different random number
@@ -102,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
         button2.setVisibility(View.INVISIBLE);
         timer = findViewById(R.id.textView);
-        countDownTimer = new CountDownTimer(15000, 1000) {
+        countDownTimer = new CountDownTimer(30000, 1000) {
             @Override
             public void onTick(long l) {
                 timer.setText(Integer.toString((int) (l / 1000))+" s");
