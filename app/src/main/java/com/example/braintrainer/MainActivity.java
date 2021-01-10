@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO add a countdown timer for the game(done)
     // think of a way to randomize the correct answer choice(done)
     // add a done text and play again button after countdown ends(done)
-    // make a + - * / game app
+    // make a + - * / game app(done)
 
 
     Random random = new Random();
